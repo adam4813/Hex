@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hex/hex.iml" filepath="$PROJECT_DIR$/hex/hex.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hexProject.iml" filepath="$PROJECT_DIR$/hexProject.iml" />
+    </modules>
+  </component>
+</project>
+
