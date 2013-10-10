@@ -12,6 +12,7 @@ public class HexDrawable extends ShapeDrawable {
 	protected String name;
 	protected int color;
 	protected int textColor;
+	private static double distanceToEdge;
 
 	public HexDrawable(int color) {
 		this.name = "0x00";
@@ -22,6 +23,13 @@ public class HexDrawable extends ShapeDrawable {
 		int stdH = 100;
 		float w3 = stdW / 3;
 		float h2 = stdH / 2;
+
+		double edgeMiddleX = (stdW + stdW * 0.75) / 2;
+		double edgeMiddleY = (stdH / 2 + stdH) / 2;
+		double edgeX = (edgeMiddleX - stdW / 2) * (edgeMiddleX - stdW / 2);
+		double edgeY = (edgeMiddleY - stdH / 2) * (edgeMiddleY - stdH / 2);
+		distanceToEdge = Math.sqrt(edgeX + edgeY) * 1.05;
+
 		path.moveTo(0, h2);
 		h2 -= 6 / 2;
 		path.rLineTo(w3, -h2); path.rLineTo(w3, 0); path.rLineTo(w3, h2);
@@ -37,6 +45,7 @@ public class HexDrawable extends ShapeDrawable {
 
 	public HexDrawable(HexDrawable other) {
 		this(other.color);
+		this.textColor = other.textColor;
 		this.name = other.name;
 	}
 
@@ -47,12 +56,6 @@ public class HexDrawable extends ShapeDrawable {
 		if (quadX > bounds.width() || quadY > bounds.height()) {
 			return false;
 		}
-		//return 4 * (bounds.width() * bounds.height() - bounds.width() * quadX - bounds.height() * quadY) >= 0;
-		double edgeMiddleX = (bounds.width() + bounds.width() * 0.75) / 2;
-		double edgeMiddleY = (bounds.height() / 2 + bounds.height()) / 2;
-		double edgeX = (edgeMiddleX + bounds.left - bounds.centerX()) * (edgeMiddleX + bounds.left - bounds.centerX());
-		double edgeY = (edgeMiddleY + bounds.top - bounds.centerY()) * (edgeMiddleY + bounds.top - bounds.centerY());
-		double distanceToEdge = Math.sqrt(edgeX + edgeY) * 1.05;
 		double distanceToPoint = Math.sqrt((bounds.centerX() - x) * (bounds.centerX() - x) + (bounds.centerY() - y) * (bounds.centerY() - y));
 
 		return distanceToPoint < distanceToEdge;

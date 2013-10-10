@@ -19,6 +19,10 @@ public class MainActivity extends Activity {
 		this.hexview.addHex(new StoneHex(), 1, 0);
 		this.hexview.addHex(new StoneHex(), 0, 2);
 		this.hexview.addHex(new StoneHex(), 0, 3);
+		this.hexview.addHex(new WaterHex(), 2, 1);
+		this.hexview.addHex(new WaterHex(), 3, 0);
+		this.hexview.addHex(new WaterHex(), 3, 1);
+		this.hexview.addHex(new WaterHex(), 3, 2);
 
 		GrassHex g1 = new GrassHex();
 		this.hexview.floodFill(g1);

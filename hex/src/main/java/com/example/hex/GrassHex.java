@@ -8,7 +8,7 @@ import android.graphics.Color;
 public class GrassHex extends HexDrawable {
 	public GrassHex() {
 		super(0xff11dd33);
-	 	super.name = "Grass";
-		this.textColor = Color.DKGRAY;
+	 	name = "Grass";
+		textColor = Color.BLACK;
 	}
 }
