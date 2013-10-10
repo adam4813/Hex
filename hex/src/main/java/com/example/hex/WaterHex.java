@@ -8,7 +8,8 @@ import android.graphics.Color;
 public class WaterHex extends HexDrawable {
 	public WaterHex() {
 		super(0xff2F55cd);
-	 	name = "Stone";
+	 	name = "Water";
 		textColor = Color.WHITE;
+		this.textPaint.setColor(Color.WHITE);
 	}
 }

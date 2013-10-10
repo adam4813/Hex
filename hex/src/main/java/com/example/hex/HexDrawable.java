@@ -13,11 +13,17 @@ public class HexDrawable extends ShapeDrawable {
 	protected int color;
 	protected int textColor;
 	private static double distanceToEdge;
+	protected Paint textPaint = new Paint();
 
 	public HexDrawable(int color) {
 		this.name = "0x00";
 		this.color = color;
-		this.textColor = Color.BLACK;
+
+		this.textPaint.setColor(Color.BLACK);
+		this.textPaint.setStyle(Paint.Style.FILL);
+		this.textPaint.setTextSize(15);
+		this.textPaint.setTextAlign(Paint.Align.CENTER);
+
 		Path path = new Path();
 		int stdW = 100;
 		int stdH = 100;
@@ -37,7 +43,6 @@ public class HexDrawable extends ShapeDrawable {
 		Shape s = new PathShape(path, stdW, stdH);
 		setShape(s);
 		Paint p = getPaint();
-		p.setColor(0xff00ff00);
 		p.setColor(color);
 		p.setStyle(Paint.Style.FILL_AND_STROKE);
 		p.setStrokeWidth(1);
@@ -46,6 +51,7 @@ public class HexDrawable extends ShapeDrawable {
 	public HexDrawable(HexDrawable other) {
 		this(other.color);
 		this.textColor = other.textColor;
+		this.textPaint.setColor(other.textColor);
 		this.name = other.name;
 	}
 
@@ -72,11 +78,6 @@ public class HexDrawable extends ShapeDrawable {
 	@Override
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
-		Paint p = getPaint();
-		p.setColor(this.textColor);
-		p.setStyle(Paint.Style.FILL);
-		p.setTextSize(15);
-		p.setTextAlign(Paint.Align.CENTER);
-		canvas.drawText(this.name, this.getBounds().centerX(), this.getBounds().top + 17, p);
+		canvas.drawText(this.name, this.getBounds().centerX(), this.getBounds().top + 17, this.textPaint);
 	}
 }

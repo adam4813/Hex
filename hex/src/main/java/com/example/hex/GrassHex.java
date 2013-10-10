@@ -10,5 +10,6 @@ public class GrassHex extends HexDrawable {
 		super(0xff11dd33);
 	 	name = "Grass";
 		textColor = Color.BLACK;
+		this.textPaint.setColor(Color.BLACK);
 	}
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,8 +13,13 @@ import java.util.ArrayList;
 public class HexGridView  extends View {
 	private ArrayList<ArrayList<HexDrawable>> hexes = new ArrayList<ArrayList<HexDrawable>>();
 
+	Pawn pawn = new Pawn();
+	HexDrawable activeHex = null;
+	ActiveHexOutline activeHexOutline = new ActiveHexOutline();
+
 	public HexGridView(Context context) {
 		super(context);
+		this.pawn.setBounds(40, 40, 60, 70);
 	}
 
 	protected void onDraw(Canvas canvas) {
@@ -23,6 +27,10 @@ public class HexGridView  extends View {
 			for (HexDrawable hex : row) {
 				hex.draw(canvas);
 			}
+		}
+		pawn.draw(canvas);
+		if (activeHex != null) {
+			activeHexOutline.draw(canvas);
 		}
 	}
 
@@ -79,11 +87,24 @@ public class HexGridView  extends View {
 				for (ArrayList<HexDrawable> row : this.hexes) {
 					for (HexDrawable hex : row) {
 						if (hex.hitTest(x, y)) {
-							Toast.makeText(this.getContext(), "Hit test: " + hex.getName(), Toast.LENGTH_SHORT).show();
+							//Toast.makeText(this.getContext(), "Hit test: " + hex.getName(), Toast.LENGTH_SHORT).show();
+							if (this.activeHex == hex) {
+								int left = hex.getBounds().left + this.pawn.getOffsetX();
+								int top = hex.getBounds().top + this.pawn.getOffsetY();
+								int width = hex.getBounds().left + this.pawn.getOffsetX() + this.pawn.getWidth();
+								int height = hex.getBounds().top + this.pawn.getOffsetY() + this.pawn.getHeight();
+								this.pawn.setBounds(left, top, width, height);
+								this.activeHex = null;
+							}
+							else {
+								this.activeHex = hex;
+								this.activeHexOutline.setBounds(hex.getBounds());
+							}
 						}
 					}
 				}
 		}
+		invalidate();
 		return true;
 	}
 }

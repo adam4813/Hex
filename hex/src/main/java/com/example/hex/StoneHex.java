@@ -10,5 +10,6 @@ public class StoneHex extends HexDrawable {
 		super(0xff0F1F23);
 	 	name = "Stone";
 		textColor = Color.WHITE;
+		this.textPaint.setColor(Color.WHITE);
 	}
 }
